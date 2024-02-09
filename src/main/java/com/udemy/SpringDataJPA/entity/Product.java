@@ -25,7 +25,7 @@ public class Product {
             allocationSize = 1)
     private Long id;
 
-    @Column(name = "stock_keeping_unit", nullable = false)
+    @Column(name = "stock_keeping_unit", nullable = false, unique = true)
     private String sku;
 
     @Column(nullable = false)
@@ -75,12 +75,16 @@ public class Product {
     public Product() {
     }
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getSku() {
@@ -127,15 +131,22 @@ public class Product {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
     public LocalDateTime getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(LocalDateTime lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", sku='" + sku + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", active=" + active +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
+                '}';
     }
 }
