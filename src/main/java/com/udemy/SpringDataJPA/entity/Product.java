@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -35,7 +36,7 @@ public class Product {
     private String description;
 
     @Column(nullable = false)
-    private Double price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private boolean active;
@@ -50,7 +51,7 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
 
-    public Product(String sku, String name, String description, Double price, boolean active, String imageUrl) {
+    public Product(String sku, String name, String description, BigDecimal price, boolean active, String imageUrl) {
         this.sku = sku;
         this.name = name;
         this.description = description;
@@ -103,11 +104,11 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

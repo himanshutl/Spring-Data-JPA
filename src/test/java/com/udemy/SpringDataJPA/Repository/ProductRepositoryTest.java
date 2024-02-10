@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +23,7 @@ class ProductRepositoryTest {
         product.setName("test product");
         product.setDescription("test description");
         product.setSku("test sku");
-        product.setPrice(100.00);
+        product.setPrice(new BigDecimal(100));
         product.setActive(true);
         product.setImageUrl("test url");
 
@@ -65,7 +65,7 @@ class ProductRepositoryTest {
         product.setName("test product 2");
         product.setDescription("test description 2");
         product.setSku("test sku 2");
-        product.setPrice(200.00);
+        product.setPrice(new BigDecimal(200));
         product.setActive(true);
         product.setImageUrl("test url 2");
 
@@ -73,7 +73,7 @@ class ProductRepositoryTest {
         product2.setName("test product 3");
         product2.setDescription("test description 3");
         product2.setSku("test sku 3");
-        product2.setPrice(400.00);
+        product2.setPrice(new BigDecimal(400));
         product2.setActive(true);
         product2.setImageUrl("test url 3");
 
@@ -130,7 +130,5 @@ class ProductRepositoryTest {
         boolean b = productRepository.existsById(1L);
         System.out.println(b);
     }
-
-
 }
 
