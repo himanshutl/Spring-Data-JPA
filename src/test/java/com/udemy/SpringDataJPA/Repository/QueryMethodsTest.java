@@ -47,12 +47,23 @@ class QueryMethodsTest {
     }
 
     @Test
-    void findByPriceGreaterThan(){
-        BigDecimal price = new BigDecimal(100);
+    void findByPriceGreaterThanMethod(){
+        BigDecimal price = new BigDecimal(150);
         List<Product> products = productRepository.findByPriceGreaterThan(price);
         products
                 .forEach(product -> System.out.println(product.getName()));
     }
 
+    @Test
+    void  findByPriceLessThanMethod(){
+        List<Product> products = productRepository.findByPriceLessThan(new BigDecimal(250));
+        products.forEach(product -> System.out.println(product.getName() +" "+product.getPrice()));
+    }
 
+    @Test
+    void findByNameContainingIgnoreCaseOOrderByPriceMethod(){
+        List<Product> products = productRepository
+                .findByNameContainingIgnoreCaseOrderByPriceAsc("product");
+        products.forEach(product -> System.out.println(product.getName() +" "+product.getPrice()));
+    }
 }

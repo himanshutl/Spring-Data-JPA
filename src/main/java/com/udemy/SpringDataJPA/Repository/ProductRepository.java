@@ -1,8 +1,10 @@
 package com.udemy.SpringDataJPA.Repository;
 
 import com.udemy.SpringDataJPA.entity.Product;
+import org.antlr.v4.runtime.ListTokenSource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -28,4 +30,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Product findDistinctByName(String name);
 
     List<Product> findByPriceGreaterThan(BigDecimal price);
+
+    List<Product> findByPriceLessThan(BigDecimal price);
+
+    List<Product> findByNameContainingIgnoreCaseOrderByPriceAsc(String name);
+
+    List<Product> findByNameLike(String name);
+
+
 }
