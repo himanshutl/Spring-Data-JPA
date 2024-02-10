@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +66,21 @@ class QueryMethodsTest {
     void findByNameContainingIgnoreCaseOOrderByPriceMethod(){
         List<Product> products = productRepository
                 .findByNameContainingIgnoreCaseOrderByPriceAsc("product");
+        products.forEach(product -> System.out.println(product.getName() +" "+product.getPrice()));
+    }
+
+    @Test
+    void findByDateCreatedBetweenMethod(){
+        /*
+        * this method returns all products created between 2024-02-10 11:39 and 2024-02-10 11:40
+        */
+        List<Product> products = productRepository
+                .findByDateCreatedBetween(
+                        LocalDateTime
+                                .of(2024, 2, 10, 11, 39),
+                        LocalDateTime
+                                .of(2024, 2, 10, 12, 40)
+                );
         products.forEach(product -> System.out.println(product.getName() +" "+product.getPrice()));
     }
 }
