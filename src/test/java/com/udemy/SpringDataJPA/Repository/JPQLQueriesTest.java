@@ -19,4 +19,11 @@ public class JPQLQueriesTest {
                 .findByNameOrDescription("updated product", "test description 2");
         products.forEach(product -> System.out.println(product.getName() +" "+product.getPrice()));
     }
+
+    @Test
+    void findByNameOrDescriptionJPQLNamedParamMethod(){
+        Product product = productRepository
+                .findByNameOrDescriptionJPQLNamedParam("updated product", "update product");
+        System.out.println(product.getName() +" "+product.getPrice());
+    }
 }

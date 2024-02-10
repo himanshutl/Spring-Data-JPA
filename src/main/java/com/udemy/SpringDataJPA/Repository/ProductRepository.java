@@ -3,6 +3,7 @@ package com.udemy.SpringDataJPA.Repository;
 import com.udemy.SpringDataJPA.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -48,4 +49,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // define JPQL query using @Query with index or position parameter
     @Query("select p from Product p where p.name = ?1 OR p.description = ?2")
     List<Product> findByNameOrDescription(String name, String description);
+
+    //define JPQL query with @Query annotation with named parameters
+    @Query("select p from Product p where p.name = :name or p.description = :description")
+    Product findByNameOrDescriptionJPQLNamedParam(@Param("name") String name,
+                                                  @Param("description")String description);
 }
