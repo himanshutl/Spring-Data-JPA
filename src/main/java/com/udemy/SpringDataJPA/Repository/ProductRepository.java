@@ -54,4 +54,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p from Product p where p.name = :name or p.description = :description")
     Product findByNameOrDescriptionJPQLNamedParam(@Param("name") String name,
                                                   @Param("description")String description);
+
+    //using native sql query using @Query, value and nativeQuery=true
+    @Query(value = "select * from products p where p.name = ?1 or p.description = ?2", nativeQuery = true)
+    Product findByNameOrDescriptionSQLIndexQuery(String name, String description);
+
 }
