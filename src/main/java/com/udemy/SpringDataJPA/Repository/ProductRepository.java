@@ -1,10 +1,9 @@
 package com.udemy.SpringDataJPA.Repository;
 
 import com.udemy.SpringDataJPA.entity.Product;
-import org.antlr.v4.runtime.ListTokenSource;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -46,4 +45,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findTop2ByOrderByDateCreatedDesc();
 
+    // define JPQL query using @Query with index or position parameter
+    @Query("select p from Product p where p.name = ?1 OR p.description = ?2")
+    List<Product> findByNameOrDescription(String name, String description);
 }
