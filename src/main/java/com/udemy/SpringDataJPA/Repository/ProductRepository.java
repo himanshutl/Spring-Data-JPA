@@ -83,7 +83,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Product findByDescription(String description);
     @Query(nativeQuery = true)
     List<Product> findByActive(@Param("status") boolean status);
-
-
-
 }
