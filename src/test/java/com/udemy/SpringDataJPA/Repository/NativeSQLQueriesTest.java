@@ -17,4 +17,13 @@ public class NativeSQLQueriesTest {
                 .findByNameOrDescriptionSQLIndexQuery("updated product", "update product");
         System.out.println(product.getName() +" "+product.getPrice());
     }
+
+    @Test
+    void findByNameOrDescriptionSQLNamedQueryMethod(){
+        Product product = productRepository
+                .findByNameOrDescriptionSQLNamedQuery("test product 2", "test description 2");
+        System.out.println(product.getName() +" "+product.getPrice());
+    }
+
+
 }
