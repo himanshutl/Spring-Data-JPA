@@ -22,6 +22,21 @@ import java.util.Objects;
         }
 
 )
+@NamedNativeQueries(
+        {
+                @NamedNativeQuery(
+                        name = "Product.findByDescription",
+                        query = "select * from products p where p.description = ?1 ",
+                        resultClass = Product.class
+                ),
+                @NamedNativeQuery(
+                        name = "Product.findByStatus",
+                        query = "select * from products p where p.active = :active",
+                        resultClass = Product.class
+                )
+
+        }
+)
 @Entity
 @Table(name = "products",
         schema = "udemy_springdatajpa",

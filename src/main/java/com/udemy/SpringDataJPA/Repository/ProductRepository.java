@@ -76,4 +76,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     */
     Product findBySku(String sku);
 
+    /*
+    * using SQL NativeNamedQuery to find product by description
+    */
+    @Query(nativeQuery = true)
+    Product findByDescription(String description);
+    @Query(nativeQuery = true)
+    List<Product> findByActive(@Param("status") boolean status);
+
+
+
 }
