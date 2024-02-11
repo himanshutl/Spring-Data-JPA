@@ -8,6 +8,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@NamedQuery(
+        name = "Product.findByPrice",
+        query = "select p from Product p where p.price = ?1"
+)
+@NamedQuery(
+        name = "Product.findBySku",
+        query = "select p from Product p where p.sku = :sku"
+)
 @Entity
 @Table(name = "products",
         schema = "udemy_springdatajpa",
