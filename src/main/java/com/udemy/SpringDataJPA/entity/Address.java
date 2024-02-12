@@ -24,6 +24,19 @@ public class Address {
     private String state;
     private String country;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    private Order order;
+
+    public Address(String street, int pincode, String city, String state, String country, Order order) {
+        this.street = street;
+        this.pincode = pincode;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.order = order;
+    }
+
     public Address(String street, int pincode, String city, String state, String country) {
         this.street = street;
         this.pincode = pincode;
@@ -33,6 +46,14 @@ public class Address {
     }
 
     public Address() {
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getStreet() {
@@ -97,6 +118,7 @@ public class Address {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
+                ", order=" + order +
                 '}';
     }
 }

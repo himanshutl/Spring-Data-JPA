@@ -16,7 +16,7 @@ import java.util.Objects;
 )
 public class Order {
     @Id
-    @Column(name = "Order_id")
+    @Column(name = "order_id")
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "order_sequence")
@@ -48,9 +48,9 @@ public class Order {
             CascadeType.MERGE,   //provides support for updating child entity
             CascadeType.REMOVE,  //provides support for deleting child entity
             },
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER,
+            mappedBy = "order"
     )
-    @JoinColumn(name = "billing_address_id", referencedColumnName = "address_id", nullable = false)
     private Address billingAddress;
 
     public Order(String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, boolean status) {
@@ -59,6 +59,16 @@ public class Order {
         this.totalPrice = totalPrice;
         this.status = status;
     }
+
+    public Order(String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, boolean status, Address billingAddress) {
+        this.orderTrackingNumber = orderTrackingNumber;
+        this.totalQuantity = totalQuantity;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.billingAddress = billingAddress;
+    }
+
+
 
     public Order() {
     }
