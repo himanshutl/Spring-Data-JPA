@@ -1,6 +1,7 @@
 package com.udemy.SpringDataJPA.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -19,9 +20,16 @@ public class OrderItem {
 
     private int quantity;
 
+    //bi directional one to one mapping
     @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
+
+    //bi directional many to one mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_order_id", referencedColumnName = "pk_order_id")
+    private Order order;
+
 
     public OrderItem() {
     }

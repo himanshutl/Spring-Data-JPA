@@ -20,6 +20,9 @@ public class OneToManyUniDirectionalMappingTest {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @Test
     void saveOrderMethod(){
         Order order = new Order();
@@ -57,8 +60,14 @@ public class OneToManyUniDirectionalMappingTest {
         address.setCountry("India");
 
         order.setBillingAddress(address);
-
         orderRepository.save(order);
+    }
+
+    @Test
+    void getOrderMethod(){
+        Order order = orderRepository.findById(2L).get();
+        for (OrderItem item: order.getOrderItems())
+            System.out.println(item.getProduct().getName());
     }
 
 }

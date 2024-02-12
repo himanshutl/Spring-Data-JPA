@@ -48,11 +48,10 @@ public class Order {
     @CreationTimestamp
     private LocalDate dateUpdated;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Address billingAddress;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-    @JoinColumn(name = "fk_order_id", referencedColumnName = "pk_order_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
 
     public BigDecimal getTotalAmount(){
@@ -71,6 +70,18 @@ public class Order {
         this.status = status;
         this.billingAddress = billingAddress;
         this.orderItems = orderItems;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public LocalDate getDateUpdated() {
+        return dateUpdated;
     }
 
     public Set<OrderItem> getOrderItems() {
