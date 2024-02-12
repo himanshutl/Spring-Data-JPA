@@ -38,7 +38,7 @@ class ProductCategoryRepositoryTest {
         p2.setDescription("Advanced Java programming");
         p2.setActive(true);
         p2.setSku("JAVA1");
-        p2.setImageUrl("effcetive.png");
+        p2.setImageUrl("effective.png");
         p2.setProductCategory(productCategory);
         productCategory.getProducts().add(p2);
 
