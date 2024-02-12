@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+//Ecommerce Project
+
 @Entity
 @Table(name = "Orders",
         schema = "udemy_springdatajpa",
