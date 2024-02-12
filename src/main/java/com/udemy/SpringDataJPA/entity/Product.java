@@ -81,6 +81,10 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
 
+    @ManyToOne()
+    @JoinColumn(name="fk_category_id", referencedColumnName = "pk_category_id")
+    private ProductCategory productCategory;
+
     public Product(String sku, String name, String description, BigDecimal price, boolean active, String imageUrl) {
         this.sku = sku;
         this.name = name;
@@ -96,6 +100,14 @@ public class Product {
         if (object == null || getClass() != object.getClass()) return false;
         Product product = (Product) object;
         return Objects.equals(id, product.id) && Objects.equals(sku, product.sku);
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
     }
 
     @Override

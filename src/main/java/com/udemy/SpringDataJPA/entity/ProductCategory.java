@@ -2,6 +2,8 @@ package com.udemy.SpringDataJPA.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,9 +11,13 @@ import java.util.Objects;
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "pk_category_id")
+    private Long id;
     private String categoryName;
     private String categoryDescription;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "productCategory")
+    private List<Product> products = new ArrayList<>();
 
     public ProductCategory() {
     }
@@ -19,6 +25,14 @@ public class ProductCategory {
     public ProductCategory(String categoryName, String categoryDescription) {
         this.categoryName = categoryName;
         this.categoryDescription = categoryDescription;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public long getId() {
