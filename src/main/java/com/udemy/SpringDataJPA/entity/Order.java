@@ -43,6 +43,16 @@ public class Order {
     @CreationTimestamp
     private LocalDate dateUpdated;
 
+    @OneToOne(cascade = {
+            CascadeType.PERSIST, //no update support for target entity
+            CascadeType.MERGE,   //provides support for updating child entity
+            CascadeType.REMOVE,  //provides support for deleting child entity
+            },
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "billing_address_id", referencedColumnName = "address_id", nullable = false)
+    private Address billingAddress;
+
     public Order(String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, boolean status) {
         this.orderTrackingNumber = orderTrackingNumber;
         this.totalQuantity = totalQuantity;
@@ -85,6 +95,14 @@ public class Order {
         this.status = status;
     }
 
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,6 +126,7 @@ public class Order {
                 ", status=" + status +
                 ", dateCreated=" + dateCreated +
                 ", dateUpdated=" + dateUpdated +
+                ", billingAddress=" + billingAddress +
                 '}';
     }
 }
