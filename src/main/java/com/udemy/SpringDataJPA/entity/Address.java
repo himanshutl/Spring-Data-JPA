@@ -25,7 +25,7 @@ public class Address {
     private String country;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    @JoinColumn(name = "fk_order_id", referencedColumnName = "pk_order_id")
     private Order order;
 
     public Address(String street, int pincode, String city, String state, String country, Order order) {

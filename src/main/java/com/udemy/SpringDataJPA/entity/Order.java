@@ -2,6 +2,7 @@ package com.udemy.SpringDataJPA.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorHSQLDBDatabaseImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,7 +19,7 @@ import java.util.Set;
 )
 public class Order {
     @Id
-    @Column(name = "order_id")
+    @Column(name = "pk_order_id")
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "order_sequence")
@@ -49,26 +50,34 @@ public class Order {
     private Address billingAddress;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-    @JoinColumn(name = "order_item_id", referencedColumnName = "order_id")
+    @JoinColumn(name = "fk_order_id", referencedColumnName = "pk_order_id")
     private Set<OrderItem> orderItems = new HashSet<>();
 
-
-    public Order(String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, boolean status) {
-        this.orderTrackingNumber = orderTrackingNumber;
-        this.totalQuantity = totalQuantity;
-        this.totalPrice = totalPrice;
-        this.status = status;
+    public BigDecimal getTotalAmount(){
+        BigDecimal amount = new BigDecimal(0);
+        for(OrderItem orderItem: orderItems){
+            amount = amount
+                    .add(orderItem.getPrice());
+        }
+        return amount;
     }
 
-    public Order(String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, boolean status, Address billingAddress) {
+    public Order(String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, boolean status, Address billingAddress, Set<OrderItem> orderItems) {
         this.orderTrackingNumber = orderTrackingNumber;
         this.totalQuantity = totalQuantity;
         this.totalPrice = totalPrice;
         this.status = status;
         this.billingAddress = billingAddress;
+        this.orderItems = orderItems;
     }
 
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
 
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 
     public Order() {
     }
