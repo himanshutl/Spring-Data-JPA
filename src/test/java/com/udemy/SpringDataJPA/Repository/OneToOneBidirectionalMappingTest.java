@@ -47,11 +47,8 @@ public class OneToOneBidirectionalMappingTest {
     @Test
     void getAddressMethod(){
         Address address = addressRepository.findById(1L).get();
-        System.out.println(address);
+        System.out.println(address.toString());
+        System.out.println(address.getOrder().toString());
     }
-
-
-
-
 
 }

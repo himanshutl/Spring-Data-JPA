@@ -46,6 +46,7 @@ import java.util.Objects;
 )
 public class Product {
     @Id
+    @Column(name = "product_id")
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "product_generator")

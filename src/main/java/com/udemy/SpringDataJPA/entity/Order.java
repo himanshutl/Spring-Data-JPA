@@ -5,7 +5,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Orders",
@@ -43,15 +45,13 @@ public class Order {
     @CreationTimestamp
     private LocalDate dateUpdated;
 
-    @OneToOne(cascade = {
-            CascadeType.PERSIST, //no update support for target entity
-            CascadeType.MERGE,   //provides support for updating child entity
-            CascadeType.REMOVE,  //provides support for deleting child entity
-            },
-            fetch = FetchType.EAGER,
-            mappedBy = "order"
-    )
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
     private Address billingAddress;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @JoinColumn(name = "order_item_id", referencedColumnName = "order_id")
+    private Set<OrderItem> orderItems = new HashSet<>();
+
 
     public Order(String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, boolean status) {
         this.orderTrackingNumber = orderTrackingNumber;

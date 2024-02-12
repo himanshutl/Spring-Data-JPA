@@ -118,7 +118,6 @@ public class Address {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
-                ", order=" + order +
                 '}';
     }
 }
