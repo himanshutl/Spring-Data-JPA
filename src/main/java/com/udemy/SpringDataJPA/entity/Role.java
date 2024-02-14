@@ -17,11 +17,11 @@ import java.util.Set;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_sequence")
-    @SequenceGenerator(name = "user_generator", sequenceName = "user_sequence")
+    @SequenceGenerator(name = "user_generator", sequenceName = "user_sequence", allocationSize = 1)
     @Column(name = "pk_role_id")
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
 
     @ManyToMany(
@@ -53,22 +53,5 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(name, role.name) && Objects.equals(users, role.users);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, users);
     }
 }
