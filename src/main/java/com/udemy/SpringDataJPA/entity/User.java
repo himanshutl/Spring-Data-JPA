@@ -7,11 +7,12 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "user",
+@Table(name = "users",
         uniqueConstraints = @UniqueConstraint(
                 columnNames = "email"
         )
 )
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
