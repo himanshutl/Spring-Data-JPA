@@ -2,6 +2,9 @@ package com.udemy.SpringDataJPA.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "roles",
         uniqueConstraints =
@@ -20,5 +23,10 @@ public class Role {
     @Column(unique = true)
     private String name;
 
-
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "roles"
+    )
+    private Set<User> users = new HashSet<>();
 }

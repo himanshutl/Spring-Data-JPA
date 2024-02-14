@@ -2,6 +2,7 @@ package com.udemy.SpringDataJPA.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class User {
                     referencedColumnName = "pk_role_id"
             )
     )
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
     }
